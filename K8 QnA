@@ -111,3 +111,132 @@ B) It ensures the pod is scheduled on the same node as other pods with the label
 C) It specifies the resource limits for the pod.
 D) It sets the environment variables for the pod.
 Ans- B
+
+Q9- Q. In the following YAML file for a StatefulSet, what is the purpose of the volumeClaimTemplates section?
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+ name: web
+spec:
+ serviceName: "nginx"
+ replicas: 3
+ selector:
+ matchLabels:
+ app: nginx
+ template:
+ metadata:
+ labels:
+ app: nginx
+ spec:
+ containers:
+ - name: nginx
+ image: nginx:1.14.2
+ volumeMounts:
+ - name: www
+ mountPath: /usr/share/nginx/html
+ volumeClaimTemplates:
+ - metadata:
+ name: www
+ spec:
+ accessModes: [ "ReadWriteOnce" ]
+ resources:
+ requests:
+ storage: 1Gi
+
+A) It specifies the volumes to be mounted in the containers.
+B) It defines the PersistentVolumeClaims for dynamic provisioning of storage.
+C) It sets the labels for the StatefulSet.
+D) It configures the replicas for the StatefulSet.
+Ans- B
+
+Q10- Which component is responsible for assigning the nodes to pod as per resource availability?
+Ans- Scheduler
+
+Q11- Q. Which command can you use to see the history of changes made to a deployment named api-deployment?
+
+A) kubectl history deployment/api-deployment
+B) kubectl rollout history deployment/api-deployment
+C) kubectl get history deployment/api-deployment
+D) kubectl describe history deployment/api-deployment
+Ans- C
+Q12- Which of the following runs on each node and ensures containers are running on the pod?
+Ans- Kubelet
+
+Q13- Q. Which command would you use to create a secret from literal values in Kubernetes?
+
+A) kubectl create secret generic my-secret --from-literal=username=admin --from-literal=password=1234
+B) kubectl create secret docker-registry my-secret --from-literal=username=admin --from-literal=password=1234
+C) kubectl create configmap my-secret --from-literal=username=admin --from-literal=password=1234
+D) kubectl create secret literal my-secret username=admin password=1234
+Ans- A
+Q14- Q. In the following YAML file, what is the purpose of the lifecycle section for the container?
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: lifecycle-demo
+spec:
+ containers:
+ - name: lifecycle-demo-container
+ image: nginx
+ lifecycle:
+ preStop:
+ exec:
+ command: ["/bin/sh", "-c", "echo Goodbye, World!"]
+
+A) To define environment variables for the container
+B) To execute a command before the container starts
+C) To define actions to be taken when the container is terminated
+D) To specify the resource limits for the container
+Ans- C
+Q15- Q. What does the nodeSelector field in the following YAML configuration do?
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: node-selector-demo
+spec:
+ containers:
+ - name: busybox
+ image: busybox
+ command: ["sh", "-c", "sleep 3600"]
+ nodeSelector:
+ disktype: ssd
+
+A) It defines the volume mounts for the container
+B) It schedules the pod on nodes with a specific label
+C) It sets the resource requests for the container
+D) It assigns a specific IP address to the pod
+Ans- B
+Q16- Q. In the following YAML snippet for an Ingress resource, what is the purpose of the pathType field?
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: ingress-demo
+spec:
+ rules:
+ - host: example.com
+ http:
+ paths:
+ - path: /test
+ pathType: Prefix
+ backend:
+ service:
+ name: test-service
+ port:
+ number: 80
+
+A) It specifies the type of backend service.
+B) It defines how the path matching should be interpreted.
+C) It sets the HTTP method for the Ingress rule.
+D) It determines the SSL/TLS configuration for the Ingress.
+Ans- B
+Q17- Q. Which command would you use to set an environment variable named ENV_VAR to value in a deployment called my-deployment?
+
+A) kubectl set env deployment/my-deployment ENV_VAR=value
+B) kubectl update env deployment/my-deployment ENV_VAR=value
+C) kubectl add env deployment my-deployment ENV_VAR=value
+D) kubectl config env deployment/my-deployment ENV_VAR=value
+Ans- A
