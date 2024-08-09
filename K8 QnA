@@ -1,0 +1,113 @@
+# Q1. In the following YAML configuration for a Deployment, what is the meaning of restartPolicy: Always in the container spec?
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: restart-policy-demo
+spec:
+ replicas: 3
+ selector:
+ matchLabels:
+ app: restart-demo
+ template:
+ metadata:
+ labels:
+ app: restart-demo
+ spec:
+ containers:
+ - name: nginx
+ image: nginx
+ restartPolicy: Always
+
+A) The container will always be restarted if it fails.
+B) The container will only restart on failure.
+C) The container will never restart.
+D) The restart policy is invalid in this context.
+ANS- A
+
+Q2. Which admission controllers in K8s is responsible for modifying the requests to ensure the required imagePullPolicy is applied?
+Ans- ValidatingAdmissionWebhook
+
+Q3.What is a ReplicaSet in Kubernetes?
+A. A group of pods that are managed as a single unit
+B. A mechanism to ensure high availability of pods
+C. A way to define the desired state for a pod or a group of pods
+D. A method to scale the number of pods in a deployment
+Ans- D
+
+Q4- What will happen if the following NetworkPolicy is applied in a namespace?
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+ name: deny-all
+ namespace: default
+spec:
+ podSelector: {}
+ policyTypes:
+ - Ingress
+ - Egress
+
+A) All ingress and egress traffic will be allowed.
+B) All ingress and egress traffic will be denied.
+C) Only ingress traffic will be denied, egress traffic will be allowed.
+D) Only egress traffic will be denied, ingress traffic will be allowed.
+Ans- B
+Q5- Which object is used to create a gateway for inbound traffic to your cluster?
+Ans- Ingress
+
+Q6- Q. What is the role of the tolerations field in the following Pod specification, and what does it allow?
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: nginx
+spec:
+ containers:
+ - image: nginx
+ name: nginx
+ tolerations:
+ - key: "key1"
+ operator: "Equal"
+ value: "value1"
+ effect: "NoSchedule"
+
+A) It ensures the pod is scheduled only on nodes with matching taints.
+B) It allows the pod to be scheduled on nodes with specific taints.
+C) It prevents the pod from being evicted from nodes with specific taints.
+D) It forces the pod to be scheduled on a specific node.
+Ans- A
+
+Q7- Q. What is the purpose of the readinessProbe?
+A) To check if the container is alive
+B) To check if the container is ready to accept traffic
+C) To define environment variables for the container
+D) To set resource limits for the container
+Ans- B
+
+Q8- Q. In the following YAML file, what does the affinity section specify?
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod-affinity-demo
+spec:
+ containers:
+ - name: nginx
+ image: nginx
+ affinity:
+ podAffinity:
+ requiredDuringSchedulingIgnoredDuringExecution:
+ - labelSelector:
+ matchExpressions:
+ - key: app
+ operator: In
+ values:
+ - store
+ topologyKey: "kubernetes.io/hostname"
+
+A) It ensures the pod is scheduled on a specific node.
+B) It ensures the pod is scheduled on the same node as other pods with the label app: store.
+C) It specifies the resource limits for the pod.
+D) It sets the environment variables for the pod.
+Ans- B
