@@ -240,3 +240,49 @@ B) kubectl update env deployment/my-deployment ENV_VAR=value
 C) kubectl add env deployment my-deployment ENV_VAR=value
 D) kubectl config env deployment/my-deployment ENV_VAR=value
 Ans- A
+Q18- Q. In the following YAML configuration for a ConfigMap, what is the key used to store the configuration data?
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: game-config
+data:
+ game.properties: |
+ enemies=aliens
+ lives=3
+
+Ans- game.properties
+Q19- How can Kubernetes assist non-native applications in connecting to backend Pods?
+ A) By exposing Pod IP addresses directly
+ B) By providing EndpointSlices for each Service
+ C) By offering manual configuration of network ports
+ D) By offering service discovery mechanisms
+Ans- D
+Q20- Based on what do Networkpolicy resources select pods to define and apply rules?
+Ans- Labels , Pod names , Namespaces
+Q20- Q. In the following YAML configuration for a Deployment, what is the meaning of restartPolicy: Always in the container spec?
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: restart-policy-demo
+spec:
+ replicas: 3
+ selector:
+ matchLabels:
+ app: restart-demo
+ template:
+ metadata:
+ labels:
+ app: restart-demo
+ spec:
+ containers:
+ - name: nginx
+ image: nginx
+ restartPolicy: Always
+
+A) The container will always be restarted if it fails.
+B) The container will only restart on failure.
+C) The container will never restart.
+D) The restart policy is invalid in this context.
+Ans- A
